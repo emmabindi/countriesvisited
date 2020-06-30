@@ -7,6 +7,7 @@ import Home from './Home';
 import NoMatch from './NoMatch';
 import NavBar from './NavBar';
 import EditTrip from './EditTrip';
+import Countries from './Countries';
 
 class App extends React.Component {
   render() {
@@ -19,6 +20,7 @@ class App extends React.Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/trips/create" component={CreateTrip} />
         <Route exact path="/trips/:id/edit" component={EditTrip} />
+        <Route exact path="/countries" component={Countries} />
         <Route component={NoMatch} />
       </Switch>
       </>
