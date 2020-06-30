@@ -69,7 +69,7 @@ class EditTrip extends React.Component {
               onChange={this.onInputChange}
               value={year}
             />
-            <label htmlFor="photo"></label>
+            <label htmlFor="photo">Photo</label>
             <input
               type="text"
               name="photo"

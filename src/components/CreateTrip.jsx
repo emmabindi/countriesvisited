@@ -43,6 +43,8 @@ class CreateTrip extends React.Component {
           <input type="text" name="highlights" id="highlights" onChange={this.onInputChange} />
           <label htmlFor="year">Year Visited</label>
           <input type="text" name="year" id="year" onChange={this.onInputChange} />
+          <label htmlFor="photo">Paste Url Link to Photo:</label>
+          <input type="text" name="photo" id="photo" onChange={this.onInputChange} />
           <input type="submit" value="Add Trip" />
         </form>
       </div>
