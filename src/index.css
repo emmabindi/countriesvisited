@@ -9,16 +9,16 @@ body {
 
 nav {
   padding: 20px;
-  border: 1px solid black;
+  border: 1px solid darkgrey;
 }
 
 nav a {
   text-decoration: none;
-  color: crimson;
+  color: darkolivegreen;
   margin: 0px 10px;
 }
 
-.form-container {
+.container {
   max-width: 700px;
   margin: 10px auto;
 }
@@ -43,4 +43,32 @@ form input[type=submit] {
 form textarea {
   resize: none;
   height: 100px;
+}
+
+.edit-delete-container {
+  margin: 20px 0px;
+}
+
+.edit-delete-container a, span {
+  margin-right: 10px;
+  padding-right: 25px;
+  color: darkseagreen;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.bookmark {
+  padding: 10px;
+}
+
+.trip-container {
+  padding-left: 20px;
+}
+
+.timeAdded {
+  font-size: 9px;
+}
+
+.pic {
+  width: 100px;
 }
