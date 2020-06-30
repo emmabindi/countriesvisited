@@ -8,6 +8,8 @@ import NoMatch from './NoMatch';
 import NavBar from './NavBar';
 import EditTrip from './EditTrip';
 import Countries from './Countries';
+import PrivateRoute from './PrivateRoute'
+import Secrets from './Secrets';
 
 class App extends React.Component {
   render() {
@@ -22,6 +24,7 @@ class App extends React.Component {
         <Route exact path="/trips/:id/edit" component={EditTrip} />
         <Route exact path="/countries" component={Countries} />
         <Route component={NoMatch} />
+        <PrivateRoute exact path="/secrets" component={Secrets} />
       </Switch>
       </>
     );
