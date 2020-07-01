@@ -16,6 +16,7 @@ class EditTrip extends React.Component {
       method: "PUT",
       headers: {
         "Content-Type": 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify( {country, activities, highlights, year, photo }),
     });

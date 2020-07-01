@@ -20,9 +20,10 @@ class CreateTrip extends React.Component {
     await fetch("http://localhost:3000/trips/create", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
     // this is to redirect back to trips using history prop
     this.props.history.push("/trips")

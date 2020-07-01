@@ -11,19 +11,21 @@ class Trips extends React.Component {
   }
 
   getTrips = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/trips")
-      console.log(response)
-      const trips = await response.json()
-      this.setState({ trips: trips})
-    } catch(err) {
-      console.log(err)
-    }
-  }
+    const response = await fetch("http://localhost:3000/trips", {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    const trips = await response.json()
+    this.setState({ trips: trips})
+  } 
 
   deleteTrip = async (id) => {
     await fetch(`http://localhost:3000/trips/${id}`, {
-      method: "DELETE"
+      method: "DELETE",
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
     })
     this.getTrips()
   }
@@ -37,7 +39,6 @@ class Trips extends React.Component {
           <p><strong>Highlights: </strong> {trip.highlights}</p>
           <p><strong>Year: </strong> {trip.year}</p>
           <img className="pic" src={trip.photo} alt=""/>
-          {/* <img src={trip.photo} alt=""/> */}
           <p className="timeAdded">Added: {moment(trip.created_at).startOf('minute').fromNow()}</p>
           <div className="edit-delete-container">
             <Link to={`/trips/${trip.id}/edit`}>Edit Trip</Link>
