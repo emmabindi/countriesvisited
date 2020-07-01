@@ -7,6 +7,7 @@ class PrivateRoute extends React.Component {
     loading: true,
   };
 
+<<<<<<< HEAD
   async componentDidMount() {
     try {
       const response = await fetch("http://localhost:3000/status", {
@@ -26,14 +27,30 @@ class PrivateRoute extends React.Component {
       }
     } catch(err) {
       console.log(err.message)
+=======
+  componentDidMount() {
+    const token = localStorage.getItem("token"); 
+    if (token === "password") {
+      this.setState({
+        auth: true,
+        loading: false,
+      });
+    } else {
+>>>>>>> 63efd711dc36ba2c783c4dece66b088cccd0106c
       this.setState({
         loading: false,
       });
     }
   }
+<<<<<<< HEAD
   
   render() {
     const { loading, auth } = this.state;
+=======
+  render() {
+    const { loading, auth } = this.state;
+
+>>>>>>> 63efd711dc36ba2c783c4dece66b088cccd0106c
     if (!loading && !auth) {
       return <Redirect to="/" />
     } else {
