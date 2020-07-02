@@ -11,6 +11,7 @@ import PrivateRoute from './PrivateRoute'
 import Secrets from './Secrets';
 import Login from './Login';
 import SignUp from './SignUp';
+import ViewTrip from './ViewTrip';
 
 class App extends React.Component {
   render() {
@@ -20,9 +21,10 @@ class App extends React.Component {
       <Switch>
         {/* <Route exact path="/trips" render={(props) => <Trips {...props} myProp="my prop" />} /> */}
         <PrivateRoute exact path="/secrets" component={Secrets} />
-        <PrivateRoute exact path="/trips" component={Trips} />
         <Route exact path="/" component={Home} />
+        <PrivateRoute exact path="/trips" component={Trips} />
         <PrivateRoute exact path="/trips/create" component={CreateTrip} />
+        <PrivateRoute exact path="/trips/:id" component={ViewTrip} />
         <PrivateRoute exact path="/trips/:id/edit" component={EditTrip} />
         <Route exact path="/login" component={Login} /> 
         <Route exact path="/sign-up" component={SignUp} />

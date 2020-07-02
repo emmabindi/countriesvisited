@@ -1,14 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import moment from 'moment';
+import React from 'react'
+
+class ViewTrip extends React.Component {
+  //set initial state but do I need to receive prop from trips ?? 
+  
+  state = { trips: [] }
+
+  render() {
+    return (
+      <>
+      <p>This is where each trip goes</p>
+      </>
+    )
+  } 
+}
+
+export default ViewTrip;
+
+
+/*
+
 
 class Trips extends React.Component {
-  // set initial state:
-  // state = { trips: [] } or alternative can use constructor:
-  constructor(props) {
-    super(props)
-    this.state = { trips: [] }
-  }
+
 
   getTrips = async () => {
     const response = await fetch("http://localhost:3000/trips", {
@@ -66,21 +79,4 @@ class Trips extends React.Component {
 
 export default Trips;
 
-  // getTrips = async () => { 
-  //   try {
-  //     const response = await fetch("192.168.1.102:3000", {
-  //       method: "GET",
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Accept': 'application/json'
-  //       },
-  //       // body: JSON.stringify(??)
-  //     })
-  //     console.log(response)
-  //     const trips = await response.json()
-  //     console.log(trips)
-  //     this.setState( {trips: trips })
-  //   } catch(err) {
-  //     console.log(err)
-  //   }
-  // }
+  */
