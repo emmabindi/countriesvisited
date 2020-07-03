@@ -38,10 +38,12 @@ class Trips extends React.Component {
           <p><strong>Activities: </strong> {trip.activities}</p>
           <p><strong>Highlights: </strong> {trip.highlights}</p>
           <p><strong>Year: </strong> {trip.year}</p>
-          <img className="pic" src={trip.photo} alt=""/>
+          {/* <img className="pic" src={trip.photo} alt=""/> */}
           <p className="timeAdded">Added: {moment(trip.created_at).startOf('minute').fromNow()}</p>
           <div className="show-edit-delete-container">
-            <Link to={`/trips/${trip.id}`}>See Trip Photo</Link>
+            <Link to={{
+              pathname: `/trips/${trip.id}`,
+              state: trip,}}>See Trip Photo</Link>
             <Link to={`/trips/${trip.id}/edit`}>Edit Trip</Link>
             <span onClick={() => this.deleteTrip(trip.id)}>Remove Trip</span>
           </div>
