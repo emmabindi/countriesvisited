@@ -27,6 +27,7 @@ class EditTrip extends React.Component {
       },
       body: JSON.stringify( { country, activities, highlights, year, photo }),
     });
+    window.alert("Trip Details Updated")
     this.props.history.push('/trips');
   };
   
