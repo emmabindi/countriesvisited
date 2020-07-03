@@ -27,6 +27,7 @@ class Trips extends React.Component {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
     })
+    window.alert("Trip Deleted")
     this.getTrips()
   }
 
@@ -34,12 +35,12 @@ class Trips extends React.Component {
     return this.state.trips.map((trip, index) => {
       return (
         <div className="trip-container" key={index}>
-          <h3>{trip.country}</h3>
+          <h2>{trip.country} <span className="timeAdded"> Added: {moment(trip.created_at).startOf('minute').fromNow()}</span></h2>
+          {/* <p ></p> */}
           <p><strong>Activities: </strong> {trip.activities}</p>
-          <p><strong>Highlights: </strong> {trip.highlights}</p>
+          {/* <p><strong>Highlights: </strong> {trip.highlights}</p> */}
           <p><strong>Year: </strong> {trip.year}</p>
           {/* <img className="pic" src={trip.photo} alt=""/> */}
-          <p className="timeAdded">Added: {moment(trip.created_at).startOf('minute').fromNow()}</p>
           <div className="show-edit-delete-container">
             <Link to={{
               pathname: `/trips/${trip.id}`,

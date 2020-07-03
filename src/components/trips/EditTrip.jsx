@@ -1,7 +1,14 @@
 import React from 'react';
 
 class EditTrip extends React.Component {
-  state = { country: "", activities: "", highlights: "", year: "", photo: "", loading: true, id: this.props.match.params.id }
+  state = { 
+    country: "", 
+    activities: "", 
+    highlights: "", 
+    year: "", 
+    photo: "", 
+    loading: true, 
+    id: this.props.match.params.id }
 
   onInputChange = (event) => {
     this.setState({
@@ -16,18 +23,22 @@ class EditTrip extends React.Component {
       method: "PUT",
       headers: {
         "Content-Type": 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${localStorage.getItem('token')}` 
       },
-      body: JSON.stringify( {country, activities, highlights, year, photo }),
+      body: JSON.stringify( { country, activities, highlights, year, photo }),
     });
     this.props.history.push('/trips');
   };
   
   async componentDidMount() {
     const { id } = this.state
-    const response = await fetch(`http://localhost:3000/trips/${id}`);
+    const response = await fetch(`http://localhost:3000/trips/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
     const { country, activities, highlights, year, photo } = await response.json();
-    this.setState({ country, activities, highlights, year, photo, loading: false })
+    this.setState({ country, activities, highlights, year, photo, loading: false})
   }
 
   render() {

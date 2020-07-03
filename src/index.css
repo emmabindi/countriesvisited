@@ -55,6 +55,7 @@ form textarea {
   color: darkseagreen;
   text-decoration: none;
   cursor: pointer;
+  font-size: 13px;
 }
 
 .bookmark {
@@ -67,6 +68,7 @@ form textarea {
 
 .timeAdded {
   font-size: 9px;
+  padding-left: 20px;
 }
 
 .pic {

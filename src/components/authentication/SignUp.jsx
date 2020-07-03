@@ -1,7 +1,7 @@
 import React from "react";
 
-class Login extends React.Component {
-  state = { email: "", password: "", errMessage: "" };
+class SignUp extends React.Component {
+  state = { email: "", password: "" };
 
   onInputChange = (event) => {
     const key = event.target.id;
@@ -13,38 +13,40 @@ class Login extends React.Component {
   onFormSubmit = async (event) => {
     event.preventDefault();
     const { email, password } = this.state;
-    const body = {
-      auth: { email, password },
-    };
     try {
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch("http://localhost:3000/sign-up", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify({ user: { email, password }}),
       });
       if (response.status >= 400) {
         throw new Error("incorrect credentials");
       } else {
-        const { jwt } = await response.json();
+        const response = await fetch("http://localhost:3000/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
+          body: JSON.stringify({ auth: { email, password }}),
+        })
+        const { jwt } = await response.json()
         localStorage.setItem("token", jwt);
-        this.props.history.push("/secrets");
+        this.props.history.push("/trips");
       }
     } catch (err) {
-      this.setState({
-        errMessage: err.message,
-      });
+      console.log(err.message)
     }
   };
 
   render() {
-    const { email, password, errMessage } = this.state;
+    const { email, password } = this.state;
     return (
       <div className="container">
-        <h1>Login</h1>
-        {errMessage && <span>{errMessage}</span>}
+        <h1>Sign Up</h1>
         <form onSubmit={this.onFormSubmit}>
           <label htmlFor="email">Email</label>
           <input
@@ -69,4 +71,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default SignUp;

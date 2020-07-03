@@ -1,17 +1,17 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import '../index.css';
-import CreateTrip from './CreateTrip';
-import Trips from './Trips';
+import Trips from './trips/Trips';
+import CreateTrip from './trips/CreateTrip';
+import ViewTrip from './trips/ViewTrip';
+import EditTrip from './trips/EditTrip';
 import Home from './Home';
 import NoMatch from './NoMatch';
 import NavBar from './NavBar';
-import EditTrip from './EditTrip';
 import PrivateRoute from './PrivateRoute'
 import Secrets from './Secrets';
-import Login from './Login';
-import SignUp from './SignUp';
-import ViewTrip from './ViewTrip';
+import Login from './authentication/Login';
+import SignUp from './authentication/SignUp';
 
 class App extends React.Component {
   render() {

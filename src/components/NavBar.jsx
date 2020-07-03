@@ -9,7 +9,7 @@ const NavBar = () => {
         <Link to="/">Home</Link>
         <Link to="/trips">Trip List</Link>
         <Link to="/trips/create">Add a Trip</Link>
-        <Link to="/secrets">Secrets</Link>
+        {/* <Link to="/secrets">Secrets</Link> */}
         <Link to="/login">Login</Link>
         <Link to="/sign-up">Sign Up</Link>
         <span
