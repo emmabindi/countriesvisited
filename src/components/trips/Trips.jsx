@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import SearchTrips from './SearchTrips';
 
 class Trips extends React.Component {
   // set initial state:
   // state = { trips: [] } or alternative can use constructor:
   constructor(props) {
     super(props)
-    this.state = { trips: [] }
+    this.state = { trips: [] };
   }
 
   getTrips = async () => {
@@ -16,8 +17,8 @@ class Trips extends React.Component {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     });
-    const trips = await response.json()
-    this.setState({ trips: trips})
+    const trips = await response.json();
+    this.setState({ trips: trips});
   } 
 
   deleteTrip = async (id) => {
@@ -31,12 +32,22 @@ class Trips extends React.Component {
     this.getTrips()
   }
 
+  renderTripCount = () => {
+    return (
+      <h1 className="tripCount">{this.state.trips.length} trips & counting!</h1>
+      )
+    // ((trip, index) => {
+    //   return (
+    //     <h1>Test</h1>
+    //   )
+    // })
+  }
+
   renderTrips = () => {
     return this.state.trips.map((trip, index) => {
       return (
         <div className="trip-container" key={index}>
           <h2>{trip.country} <span className="timeAdded"> Added: {moment(trip.created_at).startOf('minute').fromNow()}</span></h2>
-          {/* <p ></p> */}
           <p><strong>Activities: </strong> {trip.activities}</p>
           {/* <p><strong>Highlights: </strong> {trip.highlights}</p> */}
           <p><strong>Year: </strong> {trip.year}</p>
@@ -48,42 +59,27 @@ class Trips extends React.Component {
             <Link to={`/trips/${trip.id}/edit`}>Edit Trip</Link>
             <span onClick={() => this.deleteTrip(trip.id)}>Remove Trip</span>
           </div>
-          <hr />
-        </div>
-      )
-    })
-  }
+          <hr/>
+        </div>);
+    });
+  };
 
   async componentDidMount() {
     this.getTrips()
   }
 
   render() {
+    const { tripCount } = this.state
+    // 
     return (
-      <div>
-        {this.renderTrips()}
-      </div>
+      <>
+      <div>{this.renderTripCount()}</div>
+      {/* <SearchTrips/> */}
+      <label htmlFor>Search keyword: <input type="text"/></label>
+      <div>{this.renderTrips()}</div> 
+      </>
     )
   }
 }
 
 export default Trips;
-
-  // getTrips = async () => { 
-  //   try {
-  //     const response = await fetch("192.168.1.102:3000", {
-  //       method: "GET",
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Accept': 'application/json'
-  //       },
-  //       // body: JSON.stringify(??)
-  //     })
-  //     console.log(response)
-  //     const trips = await response.json()
-  //     console.log(trips)
-  //     this.setState( {trips: trips })
-  //   } catch(err) {
-  //     console.log(err)
-  //   }
-  // }

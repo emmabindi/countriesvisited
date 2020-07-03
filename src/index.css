@@ -74,3 +74,9 @@ form textarea {
 .pic {
   width: 100%;
 }
+
+.tripCount {
+  margin-left: 20px;
+  text-align: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
