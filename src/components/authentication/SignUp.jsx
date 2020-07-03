@@ -1,7 +1,7 @@
 import React from "react";
 
 class SignUp extends React.Component {
-  state = { email: "", password: "" };
+  state = { email: "", password: "", name: "" };
 
   onInputChange = (event) => {
     const key = event.target.id;
@@ -12,7 +12,7 @@ class SignUp extends React.Component {
 
   onFormSubmit = async (event) => {
     event.preventDefault();
-    const { email, password } = this.state;
+    const { email, password, name } = this.state;
     try {
       const response = await fetch("http://localhost:3000/sign-up", {
         method: "POST",
@@ -35,6 +35,7 @@ class SignUp extends React.Component {
         })
         const { jwt } = await response.json()
         localStorage.setItem("token", jwt);
+        localStorage.setItem("username", name)
         this.props.history.push("/trips");
       }
     } catch (err) {
@@ -43,7 +44,7 @@ class SignUp extends React.Component {
   };
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, name } = this.state;
     return (
       <div className="container">
         <h1>Sign Up</h1>
@@ -54,6 +55,14 @@ class SignUp extends React.Component {
             name="email"
             id="email"
             value={email}
+            onChange={this.onInputChange}
+          />
+          <label htmlFor="name">First Name</label>
+          <input
+            type="name"
+            name="name"
+            id="name"
+            value={name}
             onChange={this.onInputChange}
           />
           <label htmlFor="password">Password</label>

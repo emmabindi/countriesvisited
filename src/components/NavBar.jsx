@@ -15,6 +15,7 @@ const NavBar = () => {
         <span
           onClick={() => {
             localStorage.removeItem("token");
+            localStorage.removeItem("username")
             history.push("/login");
           }}
         >

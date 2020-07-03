@@ -1,7 +1,7 @@
 import React from "react";
 
 class Login extends React.Component {
-  state = { email: "", password: "", errMessage: "" };
+  state = { email: "", password: "", name: "", errMessage: "" };
 
   onInputChange = (event) => {
     const key = event.target.id;
@@ -12,7 +12,7 @@ class Login extends React.Component {
 
   onFormSubmit = async (event) => {
     event.preventDefault();
-    const { email, password } = this.state;
+    const { email, password, name } = this.state;
     const body = {
       auth: { email, password },
     };
@@ -30,6 +30,7 @@ class Login extends React.Component {
       } else {
         const { jwt } = await response.json();
         localStorage.setItem("token", jwt);
+        localStorage.setItem("username", name)
         this.props.history.push("/trips");
       }
     } catch (err) {
@@ -40,7 +41,7 @@ class Login extends React.Component {
   };
 
   render() {
-    const { email, password, errMessage } = this.state;
+    const { email, password, name, errMessage } = this.state;
     return (
       <div className="container">
         <h1>Login</h1>

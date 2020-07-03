@@ -8,7 +8,7 @@ class Trips extends React.Component {
   // state = { trips: [] } or alternative can use constructor:
   constructor(props) {
     super(props)
-    this.state = { trips: [] };
+    this.state = { trips: [], search: null};
   }
 
   getTrips = async () => {
@@ -32,36 +32,62 @@ class Trips extends React.Component {
     this.getTrips()
   }
 
+  searchTrips = (event)=> {
+    let keyword = event.target.value;
+    this.setState({search:keyword})
+  }
+
   renderTripCount = () => {
-    return (
-      <h1 className="tripCount">{this.state.trips.length} trips & counting!</h1>
+    if (this.state.trips.length == 1) {
+      return (
+        <h1 className="tripCount">{this.state.trips.length} trip & counting!</h1>
+        )
+    } else if (this.state.trips.length == 0) {
+      return (
+        <h1 className="tripCount">No trips just yet! Get packing</h1>      )
+    } else {
+      return (
+        <h1 className="tripCount">{this.state.trips.length} trips & counting!</h1>
       )
-    // ((trip, index) => {
-    //   return (
-    //     <h1>Test</h1>
-    //   )
-    // })
+    }
   }
 
   renderTrips = () => {
-    return this.state.trips.map((trip, index) => {
-      return (
-        <div className="trip-container" key={index}>
-          <h2>{trip.country} <span className="timeAdded"> Added: {moment(trip.created_at).startOf('minute').fromNow()}</span></h2>
-          <p><strong>Activities: </strong> {trip.activities}</p>
-          {/* <p><strong>Highlights: </strong> {trip.highlights}</p> */}
-          <p><strong>Year: </strong> {trip.year}</p>
-          {/* <img className="pic" src={trip.photo} alt=""/> */}
-          <div className="show-edit-delete-container">
-            <Link to={{
-              pathname: `/trips/${trip.id}`,
-              state: trip,}}>See Trip Photo</Link>
-            <Link to={`/trips/${trip.id}/edit`}>Edit Trip</Link>
-            <span onClick={() => this.deleteTrip(trip.id)}>Remove Trip</span>
-          </div>
-          <hr/>
-        </div>);
-    });
+    if (this.state.search == null) {
+      return this.state.trips.map((trip, index) => {
+        return (
+          <div className="trip-container" key={index}>
+            <h2>{trip.country} <span className="timeAdded"> Added: {moment(trip.created_at).startOf('minute').fromNow()}</span></h2>
+            <p><strong>Activities: </strong> {trip.activities}</p>
+            <p><strong>Year: </strong> {trip.year}</p>
+            <div className="show-edit-delete-container">
+              <Link to={{
+                pathname: `/trips/${trip.id}`,
+                state: trip,}}>See Trip Photo</Link>
+              <Link to={`/trips/${trip.id}/edit`}>Edit Trip</Link>
+              <span onClick={() => this.deleteTrip(trip.id)}>Remove Trip</span>
+            </div>
+            <hr/>
+          </div>);
+      });
+    } else if (this.state.trips.country.includes(this.state.search)) {
+      return this.state.trips.map((trip, index) => {
+        return (
+          <div className="trip-container" key={index}>
+            <h2>{trip.country} <span className="timeAdded"> Added: {moment(trip.created_at).startOf('minute').fromNow()}</span></h2>
+            <p><strong>Activities: </strong> {trip.activities}</p>
+            <p><strong>Year: </strong> {trip.year}</p>
+            <div className="show-edit-delete-container">
+              <Link to={{
+                pathname: `/trips/${trip.id}`,
+                state: trip,}}>See Trip Photo</Link>
+              <Link to={`/trips/${trip.id}/edit`}>Edit Trip</Link>
+              <span onClick={() => this.deleteTrip(trip.id)}>Remove Trip</span>
+            </div>
+            <hr/>
+          </div>);
+      });
+    }
   };
 
   async componentDidMount() {
@@ -75,7 +101,7 @@ class Trips extends React.Component {
       <>
       <div>{this.renderTripCount()}</div>
       {/* <SearchTrips/> */}
-      <label htmlFor>Search keyword: <input type="text"/></label>
+      <label>Search keyword: <input type="text" onChange={(e) => this.searchTrips(e)}/></label>
       <div>{this.renderTrips()}</div> 
       </>
     )
