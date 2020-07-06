@@ -12,7 +12,7 @@ class Trips extends React.Component {
   }
 
   getTrips = async () => {
-    const response = await fetch("http://localhost:3000/trips", {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/trips`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
@@ -22,7 +22,7 @@ class Trips extends React.Component {
   } 
 
   deleteTrip = async (id) => {
-    await fetch(`http://localhost:3000/trips/${id}`, {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL}/${id}`, {
       method: "DELETE",
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`

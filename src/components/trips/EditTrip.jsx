@@ -19,7 +19,7 @@ class EditTrip extends React.Component {
   onFormSubmit = async (event) => {
     event.preventDefault()
     const { id, country, activities, highlights, year, photo} = this.state 
-    await fetch(`http://localhost:3000/trips/${id}`, {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL}/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": 'application/json',
@@ -33,7 +33,7 @@ class EditTrip extends React.Component {
   
   async componentDidMount() {
     const { id } = this.state
-    const response = await fetch(`http://localhost:3000/trips/${id}`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/${id}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }

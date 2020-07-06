@@ -17,7 +17,7 @@ class CreateTrip extends React.Component {
       trip: this.state
     }
     // console.log(this.state)
-    await fetch("http://localhost:3000/trips/create", {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL}/create`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
